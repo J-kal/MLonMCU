@@ -19,3 +19,12 @@ Create the `coco/` folder at top level inside the submodule and paste the follow
 /bin/zsh -lc 'cd .../MLonMCU/lightweight-human-pose-estimation.pytorch/coco && curl -LO http://images.cocodataset.org/zips/val2017.zip'
 ```
 
+
+Command to run the validation script (Assuming you have the model weights, labels, and images in the expected folders - coco for labels and images, pre_model for model_weights):
+```
+python val.py \                    
+  --labels coco/val_subset.json \                          
+  --images-folder coco/val2017 \      
+  --checkpoint-path pre_model/checkpoint_iter_370000.pth \
+  --cpu
+```
