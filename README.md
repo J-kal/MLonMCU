@@ -30,7 +30,7 @@ python val.py \
 ```
 
 Commands to run a quick smoke test for the training script (fine-tuning on the existing weights):
-1. Make a tiny subset and prepared labels
+1. Make a tiny subset from validation group and prepare labels
 ```
 python scripts/make_val_subset.py \
   --labels coco/annotations/person_keypoints_val2017.json \
@@ -45,7 +45,7 @@ python scripts/prepare_train_labels.py \
   --net-input-size 368
 ```
 
-2. Train for 4 epochs. Do not expect any reasonable improvement with this (it is just a smoke test to verify the script).
+2. Train for 4 epochs. Do not expect any reasonable improvement with this (it is just a smoke test to verify the script and all new changes in it).
 ```
 python train.py \
   --train-images-folder coco/val2017 \
@@ -63,3 +63,4 @@ python train.py \
   --epochs 4 \
   --cpu
 ```
+
