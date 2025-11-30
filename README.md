@@ -28,3 +28,38 @@ python val.py \
   --checkpoint-path pre_model/checkpoint_iter_370000.pth \
   --cpu
 ```
+
+Commands to run a quick smoke test for the training script (fine-tuning on the existing weights):
+1. Make a tiny subset and prepared labels
+```
+python scripts/make_val_subset.py \
+  --labels coco/annotations/person_keypoints_val2017.json \
+  --output-name coco/val_subset_10.json \
+  --num-images 10
+```
+
+```
+python scripts/prepare_train_labels.py \
+  --labels coco/val_subset_10.json \
+  --output-name coco/prepared_train_annotation_10.pkl \
+  --net-input-size 368
+```
+
+2. Train for 4 epochs. Do not expect any reasonable improvement with this (it is just a smoke test to verify the script).
+```
+python train.py \
+  --train-images-folder coco/val2017 \
+  --prepared-train-labels coco/prepared_train_annotation_10.pkl \
+  --val-labels coco/val_subset_10.json \
+  --val-images-folder coco/val2017 \
+  --checkpoint-path pre_model/checkpoint_iter_370000.pth \
+  --weights-only \
+  --batch-size 2 \
+  --num-workers 0 \
+  --log-after 1 \
+  --checkpoint-after 10 \
+  --val-after 10 \
+  --experiment-name smoke_cpu \
+  --epochs 4 \
+  --cpu
+```
