@@ -64,4 +64,12 @@ python train.py \
   --cpu
 ```
 
+Docker command to convert the int8 quantized tflite model into edge_tpu tflite model (using the edge tpu compiler) - all previous steps starting from the original pytorch model can be done using scripts added in the pose_tf directory of model submodule
+```
+docker run --rm --platform linux/amd64 \                                                           
+  -v "$PWD":/workspace -w /workspace \
+  local/edgetpu-compiler -a -o pose_tf pose_tf/pose_int8.tflite
+```
+
+
 
